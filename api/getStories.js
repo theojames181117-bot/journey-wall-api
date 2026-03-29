@@ -18,10 +18,9 @@ export default async function handler(req, res) {
       apiKey: process.env.AIRTABLE_API_KEY,
     }).base(process.env.AIRTABLE_BASE_ID);
 
+    // NO SORTING (temporary)
     const records = await base('Stories')
-      .select({
-        sort: [{ field: "created at", direction: "desc" }],
-      })
+      .select({})
       .all();
 
     const stories = records.map(record => ({
