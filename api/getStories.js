@@ -18,9 +18,10 @@ export default async function handler(req, res) {
       apiKey: process.env.AIRTABLE_API_KEY,
     }).base(process.env.AIRTABLE_BASE_ID);
 
+    // TEMP TEST (no filter)
     const records = await base('Stories')
       .select({
-        filterByFormula: "{status} = 'approved'",
+        maxRecords: 5,
       })
       .all();
 
@@ -36,7 +37,10 @@ export default async function handler(req, res) {
     return res.status(200).json({ stories });
 
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Server error' });
+    console.error('ERROR:', error);
+    return res.status(500).json({
+      error: 'Server error',
+      details: error.message
+    });
   }
 }
