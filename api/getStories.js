@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     const records = await base('Stories')
       .select({
-        filterByFormula: "{status} = 'approved'",
+        filterByFormula: "LOWER({status}) = 'approved'",
         sort: [{ field: "createdTime", direction: "desc" }],
       })
       .all();
