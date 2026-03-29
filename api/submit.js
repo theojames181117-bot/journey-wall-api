@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           baby_name: data.baby_name || '',
           gestation_weeks: data.gestation_weeks,
           gestation_days: data.gestation_days || 0,
-          birth_weight: data.birth_weight,
+          "birth_weight (g)": data.birth_weight,
           message: data.message,
           image_url: data.image_url || '',
           consent: true,
