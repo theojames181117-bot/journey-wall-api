@@ -20,11 +20,10 @@ export default async function handler(req, res) {
 
     const records = await base('Stories')
       .select({
-        sort: [{ field: "createdTime", direction: "desc" }],
+        sort: [{ field: "created at", direction: "desc" }],
       })
       .all();
 
-    // TEMP: return EVERYTHING including status so we can inspect it
     const stories = records.map(record => ({
       id: record.id,
       baby_name: record.fields.baby_name || '',
