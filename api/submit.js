@@ -29,7 +29,7 @@ export default async function handler(req, res) {
           "birth_weight (g)": data.birth_weight,
           message: data.message,
           image_url: data.image_url || '',
-          consent: true,
+          consent: data.consent,
           status: { name: "pending" },
         },
       }),
