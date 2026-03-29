@@ -18,10 +18,10 @@ export default async function handler(req, res) {
       apiKey: process.env.AIRTABLE_API_KEY,
     }).base(process.env.AIRTABLE_BASE_ID);
 
-    // TEMP TEST (no filter)
     const records = await base('Stories')
       .select({
-        maxRecords: 5,
+        filterByFormula: "{status} = 'approved'",
+        sort: [{ field: "createdTime", direction: "desc" }],
       })
       .all();
 
