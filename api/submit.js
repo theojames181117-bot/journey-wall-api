@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           message: data.message,
           image_url: data.image_url || '',
           consent: true,
-          status: 'pending',
+          status: { name: "pending" },
         },
       }),
     });
