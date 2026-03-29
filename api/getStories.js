@@ -24,6 +24,7 @@ export default async function handler(req, res) {
 
     const stories = records
       .filter(record => record.fields.status === 'approved')
+      .sort((a, b) => new Date(b._rawJson.createdTime) - new Date(a._rawJson.createdTime))
       .map(record => ({
         id: record.id,
         baby_name: record.fields.baby_name || '',
