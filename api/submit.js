@@ -1,4 +1,14 @@
 export default async function handler(req, res) {
+
+  // ✅ CORS (fixes "failed to fetch")
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -31,7 +41,7 @@ export default async function handler(req, res) {
             "birth_weight (g)": Number(data.birth_weight || 0),
             message: data.message,
             consent: data.consent,
-            status: { name: "pending" }
+            status: "pending"
           },
         }),
       }
@@ -39,7 +49,7 @@ export default async function handler(req, res) {
 
     const result = await airtableRes.json();
 
-    // 👇 THIS shows real Airtable errors if any
+    // Show Airtable errors if any
     if (!airtableRes.ok) {
       return res.status(400).json(result);
     }
